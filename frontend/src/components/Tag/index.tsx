@@ -9,10 +9,10 @@ interface PropsI extends TagI {
 	small?: boolean;
 }
 
-const Tag = ({ label, id, hexColor, onClick, selected, small = false }: PropsI) => {
+const Tag = ({ name, slug, color, onClick, selected, small = false }: PropsI) => {
 	return (
-		<TagContainer small={small} selected={selected} hexColor={hexColor} onClick={() => onClick && onClick(id)}>
-			{label}
+		<TagContainer small={small} selected={selected} color={color} onClick={() => onClick && onClick(slug)}>
+			{name}
 		</TagContainer>
 	);
 };

@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tags",
+  "info": {
+    "singularName": "tag",
+    "pluralName": "tags",
+    "displayName": "Tag",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "color": {
+      "type": "customField",
+      "customField": "plugin::color-picker.color"
+    },
+    "moans": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::moan.moan",
+      "mappedBy": "tags"
+    }
+  }
+}

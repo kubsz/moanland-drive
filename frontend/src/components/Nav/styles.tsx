@@ -12,7 +12,7 @@ export const Main = styled.div`
 `;
 
 export const Side = styled.div`
-	padding: 7px 0;
+	padding: 9px 0;
 `;
 
 export const Emoji = styled.span`

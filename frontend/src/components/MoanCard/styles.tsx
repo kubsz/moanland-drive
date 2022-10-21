@@ -22,7 +22,7 @@ export const HeaderItem = styled.div`
 
 export const ItemIcon = styled.span`
 	font-size: 14px;
-	margin-top: px;
+	margin-top: -2px;
 `;
 
 export const ItemText = styled.span`

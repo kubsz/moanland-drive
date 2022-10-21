@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "moans",
+  "info": {
+    "singularName": "moan",
+    "pluralName": "moans",
+    "displayName": "Moan",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "moan": {
+      "type": "text"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "inversedBy": "moans"
+    }
+  }
+}

@@ -3,27 +3,28 @@ import Tag from '../Tag';
 import { Container, Heading, List } from './styles';
 
 export interface TagI {
-	label: string;
-	id: string;
-	hexColor: string;
+	name: string;
+	slug: string;
+	color: string;
 }
 
 interface PropsI {
 	tags: TagI[];
+	handleUpdate: any;
 }
 
-const TagFilter = ({ tags }: PropsI) => {
+const TagFilter = ({ tags, handleUpdate }: PropsI) => {
 	const [selected, setSelected] = useState([]);
 
-	const toggleId = (id: string) => {
-		const index = selected.indexOf(id);
+	const toggleId = (slug: string) => {
+		const index = selected.indexOf(slug);
 
-		if (index > -1) return setSelected(selected.filter((s) => s !== id));
-		setSelected([...selected, id]);
+		if (index > -1) return setSelected(selected.filter((s) => s !== slug));
+		setSelected([...selected, slug]);
 	};
 
 	useEffect(() => {
-		console.log(selected);
+		handleUpdate(selected);
 	}, [selected]);
 
 	return (
@@ -31,7 +32,7 @@ const TagFilter = ({ tags }: PropsI) => {
 			<Heading>Filter By Tags</Heading>
 			<List>
 				{tags.map((tag) => (
-					<Tag {...tag} selected={selected.indexOf(tag.id) > -1} onClick={() => toggleId(tag.id)} />
+					<Tag key={tag.slug} {...tag} selected={selected.indexOf(tag.slug) > -1} onClick={() => toggleId(tag.slug)} />
 				))}
 			</List>
 		</Container>
