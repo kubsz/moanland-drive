@@ -1,8 +1,13 @@
 import React from 'react';
 import { HashLoader } from 'react-spinners';
+import { SpinnerContainer } from './styles';
 
 const Spinner = () => {
-	return <HashLoader color="#36d7b7" size={24} />;
+	return (
+		<SpinnerContainer>
+			<HashLoader color="#792adb" size={32} />
+		</SpinnerContainer>
+	);
 };
 
 export default Spinner;

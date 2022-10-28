@@ -6,6 +6,7 @@ import Tag from '../Tag';
 import { CardContainer, Content, Header, HeaderItem, ItemIcon, ItemText, TagList } from './styles';
 
 import { faCalendarDays, faTruckArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { strapiDate } from 'src/utils';
 
 const MoanCard = ({ moan, createdAt, tags }: MoanI) => {
 	const day = 60 * 60 * 24;
@@ -14,17 +15,19 @@ const MoanCard = ({ moan, createdAt, tags }: MoanI) => {
 			<Header>
 				<HeaderItem>
 					<ItemIcon>
-						<FontAwesomeIcon size="xs" color="rgba(255,255,255,.5)" icon={faCalendarDays} />
+						<FontAwesomeIcon size="9x" color="rgba(255,255,255,.5)" icon={faCalendarDays} />
 					</ItemIcon>
-					<ItemText>Moaned 3 hours ago</ItemText>
+					<ItemText>Moaned {strapiDate(createdAt, true)} ago</ItemText>
 				</HeaderItem>
 			</Header>
 			<Content>{moan}</Content>
-			<TagList>
-				{tags.map((tag) => (
-					<Tag key={tag.slug} {...tag} selected={false} small={true} />
-				))}
-			</TagList>
+			{tags.length ? (
+				<TagList>
+					{tags.map((tag) => (
+						<Tag key={tag.slug} {...tag} selected={false} small={true} />
+					))}
+				</TagList>
+			) : null}
 		</CardContainer>
 	);
 };
