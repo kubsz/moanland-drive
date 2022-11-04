@@ -26,3 +26,10 @@ export const EmptyText = styled.p`
 	color: rgba(255, 255, 255, 0.5);
 	text-align: center;
 `;
+
+export const SelectedTagContainer = styled.div`
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	gap: 15px;
+`;

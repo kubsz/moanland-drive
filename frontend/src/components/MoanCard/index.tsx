@@ -15,7 +15,7 @@ const MoanCard = ({ moan, createdAt, tags }: MoanI) => {
 			<Header>
 				<HeaderItem>
 					<ItemIcon>
-						<FontAwesomeIcon size="9x" color="rgba(255,255,255,.5)" icon={faCalendarDays} />
+						<FontAwesomeIcon size="xs" color="rgba(255,255,255,.5)" icon={faCalendarDays} />
 					</ItemIcon>
 					<ItemText>Moaned {strapiDate(createdAt, true)} ago</ItemText>
 				</HeaderItem>

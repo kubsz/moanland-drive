@@ -39,11 +39,13 @@ const Dashboard = () => {
 		if (moanError) setError(true);
 		if (moanResponse && !moanError) {
 			setError(false);
-			setTimeout(() => {
-				setMoans(moanResponse.data);
-			}, 2000);
+			setMoans(moanResponse.data);
 		}
 	}, [moanResponse, moanError]);
+
+	useEffect(() => {
+		console.log(moans.filter((item) => item.tags.findIndex((tag: TagI) => selectedTags.indexOf(tag.id) > -1)));
+	}, [selectedTags]);
 
 	return (
 		<Layout>
@@ -55,7 +57,14 @@ const Dashboard = () => {
 					{moanLoading ? (
 						<Spinner />
 					) : (
-						<MoanList moans={moans.filter((item) => item.tags.findIndex((tag: TagI) => selectedTags.indexOf(tag.slug) > -1))} />
+						<MoanList
+							selectedTags={selectedTags.map((x) => tags.find((tag) => tag.id === x))}
+							moans={
+								selectedTags.length
+									? moans.filter((item) => item.tags.findIndex((tag: TagI) => selectedTags.indexOf(tag.id) === -1))
+									: moans
+							}
+						/>
 					)}
 				</>
 			)}
