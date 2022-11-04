@@ -43,10 +43,6 @@ const Dashboard = () => {
 		}
 	}, [moanResponse, moanError]);
 
-	useEffect(() => {
-		console.log(moans.filter((item) => item.tags.findIndex((tag: TagI) => selectedTags.indexOf(tag.id) > -1)));
-	}, [selectedTags]);
-
 	return (
 		<Layout>
 			{error === true ? (
