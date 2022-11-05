@@ -8,6 +8,8 @@ import { Container, Content } from './styles';
 
 interface PropsI {
 	children: React.ReactNode;
+	heading: string;
+	emoji: string;
 }
 
 const buttons: { [key: string]: ButtonConfigI } = {
@@ -15,7 +17,7 @@ const buttons: { [key: string]: ButtonConfigI } = {
 	'/': { icon: faPenToSquare, path: '/moan' }
 };
 
-const Layout = ({ children }: PropsI) => {
+const Layout = ({ children, heading, emoji }: PropsI) => {
 	let { pathname } = useLocation();
 
 	const [navButton, setNavButton] = useState(buttons['/moan']);
@@ -25,7 +27,7 @@ const Layout = ({ children }: PropsI) => {
 	}, [pathname]);
 	return (
 		<Container>
-			<Nav emoji="🏡" heading="Moanland Drive" button={navButton} />
+			<Nav emoji={emoji} heading={heading} button={navButton} />
 			<Content>{children}</Content>
 		</Container>
 	);

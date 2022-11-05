@@ -46,7 +46,7 @@ const Dashboard = () => {
 	}, [moanResponse, moanError]);
 
 	return (
-		<Layout>
+		<Layout heading="Moanland Drive" emoji="🏡">
 			{error === true ? (
 				<h1>unexpected error occurred</h1>
 			) : (

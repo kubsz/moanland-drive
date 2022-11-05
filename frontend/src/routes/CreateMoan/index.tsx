@@ -35,7 +35,7 @@ const CreateMoan = () => {
 	};
 
 	return (
-		<Layout>
+		<Layout emoji="✍️" heading="Start Moaning">
 			<Form>
 				<LabelledTextarea
 					error={error}
