@@ -4,8 +4,10 @@
 
 html,
 body {
-	@media only screen and (min-width: 768px) {
-		height: 100vh;
+	@media only screen and (max-width: 768px) {
+		height: -moz-available;
+		height: -webkit-fill-available;
+		height: fill-available;
 	}
 }
 
@@ -16,10 +18,6 @@ body {
 	color: #fff;
 	font-family: 'Roboto', sans-serif;
 	width: 100vw;
-
-	@media only screen and (max-width: 768px) {
-		height: -webkit-fill-available;
-	}
 
 	#root {
 		display: flex;
