@@ -2,8 +2,11 @@
 	box-sizing: border-box;
 }
 
-html {
-	height: 100vh;
+html,
+body {
+	@media only screen and (min-width: 768px) {
+		height: 100vh;
+	}
 }
 
 body {
@@ -13,7 +16,6 @@ body {
 	color: #fff;
 	font-family: 'Roboto', sans-serif;
 	width: 100vw;
-	height: 100vh;
 
 	@media only screen and (max-width: 768px) {
 		height: -webkit-fill-available;
@@ -23,5 +25,36 @@ body {
 		display: flex;
 		flex-direction: column;
 		flex: 1;
+	}
+}
+
+@keyframes skeleton-flash {
+	from {
+		transform: translateX(calc(var(--translate) * -1)) rotate(var(--rotate));
+	}
+	to {
+		transform: translateX(var(--translate)) rotate(var(--rotate));
+	}
+}
+
+.skeleton {
+	overflow: hidden;
+	position: relative;
+
+	--rotate: 10deg;
+	--translate: 500%;
+
+	&::before {
+		content: '';
+		display: block;
+		position: absolute;
+		background-color: rgba(255, 255, 255, 0.05);
+		filter: blur(10px);
+		width: 20%;
+		height: 200%;
+		left: 0;
+		top: -50%;
+
+		animation: skeleton-flash 1.5s ease infinite;
 	}
 }

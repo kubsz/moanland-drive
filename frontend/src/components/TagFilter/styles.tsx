@@ -20,3 +20,8 @@ export const List = styled.div`
 	overflow-x: scroll;
 	padding-bottom: 14px;
 `;
+
+export const SkeletonTag = styled.div`
+	background-color: rgba(255, 255, 255, 0.1);
+	padding: 13px 25px;
+`;

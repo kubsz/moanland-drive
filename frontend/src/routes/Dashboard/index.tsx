@@ -19,10 +19,11 @@ const moanParams = stringify(
 );
 
 const Dashboard = () => {
-	const { data: moanResponse, error: moanError, isValidating: moanLoading } = useSWR(`/moans?${moanParams}`, fetcher);
+	const { data: moanResponse, error: moanError } = useSWR(`/moans?${moanParams}`, fetcher);
 	const [moans, setMoans] = useState([]);
 	const [tags, setTags] = useState<TagI[]>([]);
 	const [error, setError] = useState(false);
+	const [moanLoading, setMoanLoading] = useState(true);
 
 	const [selectedTags, setSelectedTags] = useState([]);
 
@@ -39,6 +40,7 @@ const Dashboard = () => {
 		if (moanError) setError(true);
 		if (moanResponse && !moanError) {
 			setError(false);
+			setMoanLoading(false);
 			setMoans(moanResponse.data);
 		}
 	}, [moanResponse, moanError]);
@@ -46,22 +48,19 @@ const Dashboard = () => {
 	return (
 		<Layout>
 			{error === true ? (
-				<h1>unexpected error</h1>
+				<h1>unexpected error occurred</h1>
 			) : (
 				<>
-					{!tags.length ? <Spinner /> : <TagFilter tags={tags} handleUpdate={(data: string[]) => setSelectedTags(data)} />}
-					{moanLoading ? (
-						<Spinner />
-					) : (
-						<MoanList
-							selectedTags={selectedTags.map((x) => tags.find((tag) => tag.id === x))}
-							moans={
-								selectedTags.length
-									? moans.filter((item) => item.tags.findIndex((tag: TagI) => selectedTags.indexOf(tag.id) === -1))
-									: moans
-							}
-						/>
-					)}
+					<TagFilter tags={tags} handleUpdate={(data: string[]) => setSelectedTags(data)} />
+					<MoanList
+						moanLoading={moanLoading}
+						selectedTags={selectedTags.map((x) => tags.find((tag) => tag.id === x))}
+						moans={
+							selectedTags.length
+								? moans.filter((item) => item.tags.findIndex((tag: TagI) => selectedTags.indexOf(tag.id) === -1))
+								: moans
+						}
+					/>
 				</>
 			)}
 		</Layout>

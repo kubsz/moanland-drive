@@ -33,3 +33,17 @@ export const SelectedTagContainer = styled.div`
 	justify-content: center;
 	gap: 15px;
 `;
+
+export const MoanSkeleton = styled.div`
+	background-color: rgba(255, 255, 255, 0.1);
+	padding: 13px 25px;
+	height: 128px;
+
+	--translate: 1000%;
+	--rotate: 20deg;
+
+	&::before {
+		filter: blur(30px);
+		width: 10%;
+	}
+`;

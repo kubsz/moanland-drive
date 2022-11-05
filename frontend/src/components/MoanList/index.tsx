@@ -5,7 +5,7 @@ import MoanCard from '../MoanCard';
 import Tag from '../Tag';
 
 import { TagI } from '../TagFilter';
-import { Empty, EmptyIcon, EmptyText, List, SelectedTagContainer } from './styles';
+import { Empty, EmptyIcon, EmptyText, List, SelectedTagContainer, MoanSkeleton } from './styles';
 
 export interface MoanI {
 	tags: TagI[];
@@ -13,10 +13,11 @@ export interface MoanI {
 	createdAt: string;
 }
 
-const MoanList = ({ moans, selectedTags }: { moans: MoanI[]; selectedTags: TagI[] }) => {
+const MoanList = ({ moans, selectedTags, moanLoading }: { moans: MoanI[]; selectedTags: TagI[]; moanLoading: boolean }) => {
 	return (
 		<List>
-			{!moans.length ? (
+			{moanLoading ? Array.from(Array(10).keys()).map((i) => <MoanSkeleton className="skeleton" />) : null}
+			{!moans.length && !moanLoading ? (
 				<Empty>
 					<EmptyIcon>
 						<FontAwesomeIcon size="2xl" color="rgba(255,255,255,.7)" icon={faFaceSmileWink} />

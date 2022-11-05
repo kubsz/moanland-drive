@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Label } from '../LabelledTextarea/styles';
 import Tag from '../Tag';
-import { Container, Heading, List } from './styles';
+import { Container, Heading, List, SkeletonTag } from './styles';
 
 export interface TagI {
 	name: string;
@@ -28,15 +28,17 @@ const TagFilter = ({ tags, handleUpdate, alternateLabel }: PropsI) => {
 
 	useEffect(() => {
 		handleUpdate(selected);
-	}, [selected]);
+	}, [selected, handleUpdate]);
 
 	return (
 		<Container>
 			{alternateLabel ? <Label>Add Tags</Label> : <Heading>Filter By Tags</Heading>}
 			<List>
-				{tags.map((tag) => (
-					<Tag key={tag.slug} {...tag} selected={selected.indexOf(tag.id) > -1} onClick={() => toggleId(tag.id)} />
-				))}
+				{tags.length
+					? tags.map((tag) => (
+							<Tag key={tag.slug} {...tag} selected={selected.indexOf(tag.id) > -1} onClick={() => toggleId(tag.id)} />
+					  ))
+					: Array.from(Array(10).keys()).map((x) => <SkeletonTag className="skeleton" />)}
 			</List>
 		</Container>
 	);

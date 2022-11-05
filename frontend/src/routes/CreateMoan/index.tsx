@@ -18,6 +18,7 @@ const CreateMoan = () => {
 	const [error, setError] = useState(false);
 
 	useEffect(() => {
+		// document.body.style.height = window.innerHeight + 'px';
 		(async () => {
 			const res = await axios.get(`${process.env.REACT_APP_API_URL}/tags`);
 			setTags(res.data.data);
