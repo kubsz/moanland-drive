@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import { stringify } from 'qs';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -20,7 +21,8 @@ const CreateMoan = () => {
 
 	useEffect(() => {
 		(async () => {
-			const res = await axios.get(`${process.env.REACT_APP_API_URL}/tags`);
+			const params = stringify({ sort: 'weight:asc' }, { encodeValuesOnly: true });
+			const res = await axios.get(`${process.env.REACT_APP_API_URL}/tags?${params}`);
 			setTags(res.data.data);
 		})();
 	}, []);
@@ -30,11 +32,8 @@ const CreateMoan = () => {
 
 		let res;
 
-		if (edit) {
-			res = await axios.put(`${process.env.REACT_APP_API_URL}/moans/${edit.id}`, { data: { moan, tags: selectedTagIds } });
-		} else {
-			res = await axios.post(`${process.env.REACT_APP_API_URL}/moans`, { data: { moan, tags: selectedTagIds } });
-		}
+		const [method, params] = edit ? ['put', `/${edit.id}`] : ['post', ''];
+		res = await axios[method](`${process.env.REACT_APP_API_URL}/moans${params}`, { data: { moan, tags: selectedTagIds } });
 
 		navigate('/', { state: { editable: res.data.data.id } });
 	};

@@ -28,6 +28,9 @@
       "relation": "manyToMany",
       "target": "api::moan.moan",
       "mappedBy": "tags"
+    },
+    "weight": {
+      "type": "integer"
     }
   }
 }

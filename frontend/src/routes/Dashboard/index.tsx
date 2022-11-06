@@ -31,7 +31,8 @@ const Dashboard = (props: any) => {
 	const [selectedTags, setSelectedTags] = useState([]);
 
 	const fetchTags = async () => {
-		const res = await axios.get(`${process.env.REACT_APP_API_URL}/tags`);
+		const params = stringify({ sort: 'weight:asc' }, { encodeValuesOnly: true });
+		const res = await axios.get(`${process.env.REACT_APP_API_URL}/tags?${params}`);
 		setTags(res.data.data);
 	};
 
