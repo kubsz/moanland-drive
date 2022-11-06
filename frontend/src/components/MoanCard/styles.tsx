@@ -16,8 +16,16 @@ export const Header = styled.div`
 	border-bottom: 1px solid rgba(255, 255, 255, 0.03);
 `;
 export const HeaderItem = styled.div`
+	flex: 1;
 	display: flex;
 	gap: 5px;
+`;
+
+export const EditButton = styled.button`
+	margin-left: auto;
+	background-color: transparent;
+	border: none;
+	display: inline-block;
 `;
 
 export const ItemIcon = styled.span`
@@ -27,6 +35,7 @@ export const ItemIcon = styled.span`
 
 export const ItemText = styled.span`
 	font-size: 10px;
+	flex: 1;
 	color: rgba(255, 255, 255, 0.6);
 `;
 

@@ -6,13 +6,14 @@ interface PropsI {
 	handleUpdate: any;
 	placeholder: string;
 	error?: boolean;
+	defaultValue?: string;
 }
 
-const LabelledTextarea = ({ label, placeholder, handleUpdate, error }: PropsI) => {
+const LabelledTextarea = ({ label, placeholder, handleUpdate, error, defaultValue = '' }: PropsI) => {
 	return (
 		<Container>
 			<Label>{label}</Label>
-			<Textarea error={error} placeholder={placeholder} onChange={(e) => handleUpdate(e.target.value)} />
+			<Textarea value={defaultValue} error={error} placeholder={placeholder} onChange={(e) => handleUpdate(e.target.value)} />
 		</Container>
 	);
 };

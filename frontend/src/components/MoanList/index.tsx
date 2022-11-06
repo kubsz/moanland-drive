@@ -8,15 +8,23 @@ import { TagI } from '../TagFilter';
 import { Empty, EmptyIcon, EmptyText, List, SelectedTagContainer, MoanSkeleton } from './styles';
 
 export interface MoanI {
+	id: number;
 	tags: TagI[];
 	moan: string;
 	createdAt: string;
 }
 
-const MoanList = ({ moans, selectedTags, moanLoading }: { moans: MoanI[]; selectedTags: TagI[]; moanLoading: boolean }) => {
+interface PropsI {
+	moans: MoanI[];
+	selectedTags: TagI[];
+	moanLoading: boolean;
+	editable: number;
+}
+
+const MoanList = ({ moans, selectedTags, moanLoading, editable }: PropsI) => {
 	return (
 		<List>
-			{moanLoading ? Array.from(Array(10).keys()).map((i) => <MoanSkeleton className="skeleton" />) : null}
+			{moanLoading ? Array.from(Array(10).keys()).map((i) => <MoanSkeleton key={i} className="skeleton" />) : null}
 			{!moans.length && !moanLoading ? (
 				<Empty>
 					<EmptyIcon>
@@ -36,8 +44,8 @@ const MoanList = ({ moans, selectedTags, moanLoading }: { moans: MoanI[]; select
 					)}
 				</Empty>
 			) : null}
-			{moans.map((moan, i) => (
-				<MoanCard key={i} {...moan} />
+			{moans.map((moan: any, i) => (
+				<MoanCard key={i} {...moan} editable={moan.id === editable} />
 			))}
 		</List>
 	);

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { stringify } from 'qs';
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import Layout from 'src/components/Layout';
 import MoanList from 'src/components/MoanList';
@@ -18,7 +19,9 @@ const moanParams = stringify(
 	{ encodeValuesOnly: true }
 );
 
-const Dashboard = () => {
+const Dashboard = (props: any) => {
+	const { state } = useLocation();
+
 	const { data: moanResponse, error: moanError } = useSWR(`/moans?${moanParams}`, fetcher);
 	const [moans, setMoans] = useState([]);
 	const [tags, setTags] = useState<TagI[]>([]);
@@ -60,6 +63,7 @@ const Dashboard = () => {
 								? moans.filter((item) => item.tags.findIndex((tag: TagI) => selectedTags.indexOf(tag.id) === -1))
 								: moans
 						}
+						editable={state?.editable}
 					/>
 				</>
 			)}

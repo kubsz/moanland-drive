@@ -14,10 +14,11 @@ interface PropsI {
 	tags: TagI[];
 	handleUpdate: any;
 	alternateLabel?: boolean;
+	selectedTagIds?: number[];
 }
 
-const TagFilter = ({ tags, handleUpdate, alternateLabel }: PropsI) => {
-	const [selected, setSelected] = useState([]);
+const TagFilter = ({ tags, handleUpdate, alternateLabel, selectedTagIds = [] }: PropsI) => {
+	const [selected, setSelected] = useState(selectedTagIds);
 
 	const toggleId = (id: number) => {
 		const index = selected.indexOf(id);
@@ -38,7 +39,7 @@ const TagFilter = ({ tags, handleUpdate, alternateLabel }: PropsI) => {
 					? tags.map((tag) => (
 							<Tag key={tag.slug} {...tag} selected={selected.indexOf(tag.id) > -1} onClick={() => toggleId(tag.id)} />
 					  ))
-					: Array.from(Array(10).keys()).map((x) => <SkeletonTag className="skeleton" />)}
+					: Array.from(Array(10).keys()).map((i) => <SkeletonTag key={i} className="skeleton" />)}
 			</List>
 		</Container>
 	);
