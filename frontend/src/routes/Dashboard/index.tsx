@@ -64,7 +64,10 @@ const Dashboard = (props: any) => {
 						selectedTags={selectedTags.map((x) => tags.find((tag) => tag.id === x))}
 						moans={
 							selectedTags.length
-								? moans.filter((item) => item.tags.findIndex((tag: TagI) => selectedTags.indexOf(tag.id) === -1))
+								? moans.filter(
+										(item) =>
+											item.tags.length && item.tags.findIndex((tag: TagI) => selectedTags.indexOf(tag.id) === -1)
+								  )
 								: moans
 						}
 						editable={state?.editable}
