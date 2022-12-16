@@ -14,7 +14,10 @@ const fetcher = (url: string) => axios.get(process.env.REACT_APP_API_URL + url).
 const moanParams = stringify(
 	{
 		populate: '*',
-		sort: ['createdAt:desc']
+		sort: ['createdAt:desc'],
+		pagination: {
+			pageSize: 300
+		}
 	},
 	{ encodeValuesOnly: true }
 );
